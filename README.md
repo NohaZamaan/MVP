@@ -12,7 +12,7 @@
 #### Conclusion :
 I applied Logistic Regression model on the three methods but unfortunately I got bad scores for all three.<p>
 Now , I'm trying to apply more models on the features and I will do scaling on the three methods before modeling
-to improve the prediction of models<\p>.
+to improve the prediction of models.
 
 
 
