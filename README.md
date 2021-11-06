@@ -9,6 +9,7 @@
 - Apply logistic Regression on the three methods by using 'Pipline' and 'GrideSearch'.
 
 
+Screen Shot 1443-04-02 at 1.50.16 AM.png
 #### Conclusion :
 I applied Logistic Regression model on the three methods but unfortunately I got bad scores for all three.<p>
 Now , I'm trying to apply more models on the features and I will do scaling on the three methods before modeling
