@@ -8,9 +8,18 @@
 - Applying three methods to select the features
 - Apply logistic Regression on the three methods by using 'Pipline' and 'GrideSearch'.
 
+#### Logistic Regression Model
+| Method_Name | Train_Score | Test_Score |
+| :---:   | :-: | :-: |
+| ExtraTreesClassifier  | 0.564 | 0.503 |
+| SelectKBest |0.564  |0.548|
+|Random Forest Feature Importances |0.556 | 0.54|
 
-Screen Shot 1443-04-02 at 1.50.16 AM.png
-#### Conclusion :
+
+<b>This best score that I got by using 'SelectKBest' method and the confusion_matrix shows below:
+
+![My image](https://github.com/NohaZamaan/MVP/blob/main/Screen%20Shot%201443-04-02%20at%201.50.16%20AM.png)</b>
+### Conclusion :
 I applied Logistic Regression model on the three methods but unfortunately I got bad scores for all three.<p>
 Now , I'm trying to apply more models on the features and I will do scaling on the three methods before modeling
 to improve the prediction of models.
