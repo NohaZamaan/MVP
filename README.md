@@ -107,6 +107,14 @@ After using dummy, there are 12347 columns. It is unpossible to use all these fe
 
       
 ### Results and Conclusion 
+      
+- Random Forest was the best model performance with Scaling and GridSearch methods. However, it consumed the longest time in execution. <p>  
+- The Feature_selection with ‘SelectKBest()’ function can be the best method when applying models on it, so, may approve it on huge features. <p>
+- Still, the score isn’t good even though trying a variety  of parameters, GridSearch, and scaling the data. <p>
+- Maybe it needs other features that have more correlation with the target, or there are external conditions that affect  the target. <p>
+- This result leads us to agree that, some problems are still hard to predict their solution for them even though they have data about them. <p>
+
+
 
 ### Resources:
       
