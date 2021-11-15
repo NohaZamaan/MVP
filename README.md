@@ -8,14 +8,11 @@
 ## CONTENTS :
  * Introduction
  * Libraries
- * Data Preprocessing and Feature Engineering
+ * Data Preprocessing 
  * Methodology 
-   - EDA
-   - Exploratory Data Analysis
-   - Visualizing dataset
+   - Dealing with Features
    - Modeling
- * Project outcome
- * Recommendation and Conclusion 
+ * Results and Conclusion 
  * Resources
 
 ---
@@ -39,42 +36,90 @@ Microsoft provides its dataset ‘ https://www.kaggle.com/c/microsoft-malware- p
 
 ---
   
-### Data Preprocessing and Feature Engineering
+### Data Preprocessing 
   
 The dataset was very big , it contains 8921482 rows so,I decided to cut it in  10000 rows.<p>
 the dataset divided into a training set (90%) and a testing set (10%).<p>
 There were 10 columns that have unavalible data or null so, I drop them all. <p>
 Other features that had some missing values, presented to see the type of them. <p>
-All missing values were in numorical columns, then Visualized to see thier distribustion <p>
+All missing values were in numorical columns, then Visualized to see thier distribution <p>
+![distribution](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.29.05%20PM.png) 
+Most columns have unnormal distribution so, using 'median' to fill the missing value is the best. <p>
+Using 'get_dummy' function to convert all categorical columns <p>
+Then apply heatmap to approve no missing value in the data and print the new shape of the data   <p>
+![missing](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.29.48%20PM.png) <p>  
 
+---
 
+### Methodology <p>
+#### - Dealing with Features <p>
+After using dummy, there are 12347 columns. It is unpossible to use all these features for modeling 
+<p> So, I tried to use different techniques
+- Select the best 10 features by:
+   1)feature_importances_ from ExtraTreesClassifier: <p>
+      
+   ![feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.30.34%20PM.png) <p>
+      
+   2)SelectKBest from chi2:<p>
+      
+   ![SelectKBest](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.30.51%20PM.png) <p>
+      
+   3)feature_importances_ from RandomForestRegressor: <p>
+      
+   ![rf_feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.31.02%20PM.png) <p>
+      
+- Using Principal Component Analysis (PCA) with n_components=6 <p>
+   
+   
+#### - Modeling
 
-
-# The Minimum Viable Product (MVP) for Microsoft Malware Prediction 
-### This jupyter_notebook contains :
-- Downloading the dataset 'train.csv' from Kaggle and cut the data to be only 10,000 rows 
-- Exploring the data 
-- Dealing with missing value and drop the empty columns
-- Using function 'get_dummy' to convert the categorical features to numorics
-- Because the features in the dataset too large '12346' columns so, I prefer to use machine learning model to select the best features
-- Applying three methods to select the features
-- Apply logistic Regression on the three methods by using 'Pipline' and 'GrideSearch'.
-
-#### Logistic Regression Model
+   - Logistic Regression Model with Pipline, Scaling, GridSearch <p>
+   
 | Method_Name | Train_Score | Test_Score |
 | :---:   | :-: | :-: |
-| ExtraTreesClassifier  | 0.564 | 0.503 |
-| SelectKBest |0.564  |0.548|
-|Random Forest Feature Importances |0.556 | 0.54|
+| ExtraTreesClassifier  | 0.548 | 0.537 |
+| SelectKBest |0.591 |0.596|
+|Random Forest Feature Importances |0.549 | 0.562| 
 
+<p> I select the best two score to apply the next model on them <p>
+   
+   - KNeighborsClassifier Model with Pipline, Scaling, GridSearch <p>
+   
+| Method_Name | Train_Score | Test_Score |
+| :---:   | :-: | :-: |
+| SelectKBest |0.587  |0.592|
+|Random Forest Feature Importances |0.505 | 0.499|
+   
+   - Random Forest Classifier Model with Pipline, Scaling, GridSearch <p>  
+ 
+| Method_Name | Train_Score | Test_Score |
+| :---:   | :-: | :-: |
+| SelectKBest |0.59  |0.596|
+|Random Forest Feature Importances |0.585 | 0.585|
+| PCA  | - | 0.54 |
+      
+   - Neural_Network Model <p>
+      
 
-<b>This best score that I got by using 'SelectKBest' method and the confusion_matrix shows below:
+| Method_Name | Train_Score | Test_Score |
+| :---:   | :-: | :-: |
+| SelectKBest | - |0.581|
 
-![My image](https://github.com/NohaZamaan/MVP/blob/main/Screen%20Shot%201443-04-02%20at%201.50.16%20AM.png)</b>
-### Conclusion :
-I applied Logistic Regression model on the three methods but unfortunately I got bad scores for all three.<p>
-Now , I'm trying to apply more models on the features and I will do scaling on the three methods before modeling
-to improve the prediction of models.
+      
+### Results and Conclusion 
+
+### Resources:
+      
+[1] https://medium.com/@erikgreenj/k-neighbors-classifier-with-gridsearchcv-basics-3c445ddeb657 <p>
+
+[2] https://towardsdatascience.com/random-forest-ca80e56224c1 <p>
+
+[3] https://medium.com/@amrianto.saragih/4-methods-to-boost-the-accuracy-of-a-neural-network-model-bb694e650a69 <p>
+
+[4] https://towardsdatascience.com/pca-using-python-scikit-learn-e653f8989e60 <p>
+
+[5] https://towardsdatascience.com/machine-learning-step-by-step-6fbde95c455a <p>
+
 
 
 
