@@ -182,7 +182,7 @@ the dataset divided into a training set (90%) and a testing set (10%) in all mod
       
 👁  Random Forest was the best model performance with Scaling and GridSearch methods :+1: . However, it consumed the longest time in execution. 
       
-👁  The  scores of ‘SelectKBest()’ and 'Feature_Importances_' functions very close to each other when applying models on it, so, may recommend to use them on huge features. <p>
+👁  The  scores of ‘SelectKBest()’ and 'Feature_Importances_' functions very close to each other when applying models on them, so, may recommend to use them on huge features. <p>
    
 | Model_Name | Feature Method | Train_Score | Test_Score | Roc_Auc_score |
 | :---:      | :--:            | :--:        | :--:        | :--:      |
