@@ -105,16 +105,17 @@ Microsoft provides its dataset ‘ https://www.kaggle.com/c/microsoft-malware-pr
 ---
   
 ### Data Preprocessing 
-  
-The dataset was very big , it contains 8921482 rows so,I decided to cut it in  10000 rows.<p>
-the dataset divided into a training set (90%) and a testing set (10%).<p>
-There were 10 columns that have unavalible data or null so, I drop them all. <p>
-Other features that had some missing values, presented to see the type of them. <p>
-All missing values were in numorical columns, then Visualized to see thier distribution <p>
+   
+The dataset was very big , it contains 8921482 rows, so,I decided to cut it in 10000 rows.<p>
+There were 10 columns that had unavailable data or were null, so, I dropped them all.<p>
+Identifier features are type float but actually their number refers to ID of device or other, so I used 'count_values' then categorical to 1 refer to 'most_frequency' ,2->'Second_frequency' 3->'third_frequency', 4->'forth_frequency' and the rest values-> 5.<p>
+Other features that had some missing values, presented to see the type of them.<p>
+All missing values were in numorical columns, then Visualized to see their
+distribution.<p>
 ![distribution](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.29.05%20PM.png) 
-Most columns have unnormal distribution so, using 'median' to fill the missing value is the best. <p>
-Using 'get_dummy' function to convert all categorical columns <p>
-Then apply heatmap to approve no missing value in the data and print the new shape of the data   <p>
+Most columns have an unnormal distribution, so, using 'median' to fill in the missing value is best.<p>
+Using 'get_dummy' function to convert all categorical columns<p>
+Then apply heatmap to approve no missing value in the data and print the new shape of the data<p>
 ![missing](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.29.48%20PM.png) <p>  
 
 ---
@@ -122,32 +123,34 @@ Then apply heatmap to approve no missing value in the data and print the new sha
 ### Methodology <p>
 #### - Dealing with Features <p>
 After using dummy, there are 12347 columns. It is unpossible to use all these features for modeling 
-<p> So, I tried to use different techniques
-- Select the best 10 features by:
+<p> So, I tried to use different techniques<p>
+- Select the best 10 features by:<p>
    1)feature_importances_ from ExtraTreesClassifier: <p>
       
-   ![feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.30.34%20PM.png) <p>
+   ![feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-11%20at%2010.10.28%20PM.png) <p>
       
    2)SelectKBest from chi2:<p>
       
-   ![SelectKBest](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.30.51%20PM.png) <p>
+   ![SelectKBest](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-11%20at%2010.10.48%20PM.png) <p>
       
    3)feature_importances_ from RandomForestRegressor: <p>
       
-   ![rf_feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-10%20at%2010.31.02%20PM.png) <p>
+   ![rf_feature_importances_](https://github.com/NohaZamaan/Project_T5/blob/main/Images/Screen%20Shot%201443-04-11%20at%2010.11.01%20PM.png) <p>
       
 - Using Principal Component Analysis (PCA) with n_components=6 <p>
    
    
 #### - Modeling
+   
+the dataset divided into a training set (90%) and a testing set (10%) in all models.<p>
 
    - Logistic Regression Model with Pipline, Scaling, GridSearch <p>
    
 | Method_Name | Train_Score | Test_Score |
 | :---:   | :-: | :-: |
-| ExtraTreesClassifier  | 0.548 | 0.537 |
-| SelectKBest |0.591 |0.596|
-|Random Forest Feature Importances |0.549 | 0.562| 
+| ExtraTreesClassifier  | 0.581 | 0.593 |
+| SelectKBest |0.584 |0.599|
+|Random Forest Feature Importances |0.581 | 0.594| 
 
 <p> I select the best two score to apply the next model on them <p>
    
@@ -155,32 +158,50 @@ After using dummy, there are 12347 columns. It is unpossible to use all these fe
    
 | Method_Name | Train_Score | Test_Score |
 | :---:   | :-: | :-: |
-| SelectKBest |0.587  |0.592|
-|Random Forest Feature Importances |0.505 | 0.499|
+| SelectKBest |0.558  |0.556|
+|Random Forest Feature Importances |0.637 | 0.571|
    
    - Random Forest Classifier Model with Pipline, Scaling, GridSearch <p>  
  
 | Method_Name | Train_Score | Test_Score |
 | :---:   | :-: | :-: |
-| SelectKBest |0.59  |0.596|
-|Random Forest Feature Importances |0.585 | 0.585|
-| PCA  | - | 0.54 |
+| SelectKBest |0.59  |0.607|
+|Random Forest Feature Importances |0.601 | 0.597|
+| PCA  | 0.666| 0.54 |
       
    - Neural_Network Model <p>
       
 
-| Method_Name | Train_Score | Test_Score |
+| Method_Name | Train_roc_auc_score| Test_roc_auc_score |
 | :---:   | :-: | :-: |
-| SelectKBest | - |0.581|
-
+| SelectKBest | 0.590 |0.597|
+      
+<p>
       
 ### Results and Conclusion 
       
-- Random Forest was the best model performance with Scaling and GridSearch methods :+1: . However, it consumed the longest time in execution. <p>  
-- The Feature_selection with ‘SelectKBest()’ function can be the best method when applying models on it, so, may approve it on huge features. <p>
-- Still, the score isn’t good even though trying a variety  of parameters, GridSearch, and scaling the data. <p>
-- Maybe it needs other features that have more correlation with the target, or there are external conditions that affect  the target. <p>
-- This result leads us to agree that, some problems are still hard to predict their solution for them even though they have data about them. :shipit: <p>
+👁  Random Forest was the best model performance with Scaling and GridSearch methods :+1: . However, it consumed the longest time in execution. 
+      
+👁  The  scores of ‘SelectKBest()’ and 'Feature_Importances_' functions very close to each other when applying models on it, so, may recommend to use them on huge features. <p>
+   
+| Model_Name | Feature Method | Train_Score | Test_Score | Roc_Auc_score |
+| :---:      | :--:            | :--:        | :--:        | :--:      |
+| Random Forest Classifier | SelectKBest | 0.59  | 0.607 | 62.23 |
+   
+   <p>
+      
+ 
+👁 Still, the score isn’t good even though trying a variety of parameters. GridSearch, and scaling the data.
+      
+👁 All models give nearly the same range of scores
+
+👁 Random Forest classifier model was the best model among the other three.
+
+👁 The score still not very good, maybe need to use other techniques to improve working models, using another model or using other features.
+
+👁 Some time the test score was better than the train score a little bit; this result makes me confident that no overfitting in the model. Also, because the change is small, so, I am not worried about that, my model is under fitting.
+
+👁 This result leads us to agree that, some problems are still hard to predict their solution for them even though they have data about them. :shipit: <p>
 
 
 
